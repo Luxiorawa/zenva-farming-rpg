@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjfaq6eh0gky4"]
+[gd_scene load_steps=3 format=3 uid="uid://bjfaq6eh0gky4"]
 
 [ext_resource type="Script" path="res://Scripts/tool_slot.gd" id="1_emtph"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_jskv7"]
 
 [node name="ToolSlot" type="TextureRect"]
 script = ExtResource("1_emtph")
@@ -9,3 +11,4 @@ script = ExtResource("1_emtph")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+texture = SubResource("CanvasTexture_jskv7")

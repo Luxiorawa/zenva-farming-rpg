@@ -4,10 +4,7 @@ extends TextureRect
 @onready var selection_border: NinePatchRect = $SelectionBorder
 
 func _ready() -> void:
-	if selection_border:
-		selection_border.visible = false
-	else:
-		push_error("SelectionBorder node not found in ToolSlot!")
+	selection_border.visible = false
 	
 func select() -> void:
 	if selection_border:
@@ -16,3 +13,11 @@ func select() -> void:
 func deselect() -> void:
 	if selection_border:
 		selection_border.visible = false
+
+func configure_size(new_size: Vector2) -> void:
+	custom_minimum_size = new_size
+	size = new_size
+
+	await ready
+	if selection_border:
+		selection_border.size = new_size
