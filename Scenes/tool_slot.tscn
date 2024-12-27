@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjfaq6eh0gky4"]
+
+[ext_resource type="Script" path="res://Scripts/tool_slot.gd" id="1_emtph"]
+
+[node name="ToolSlot" type="TextureRect"]
+script = ExtResource("1_emtph")
+
+[node name="SelectionBorder" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

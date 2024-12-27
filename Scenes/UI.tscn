@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvi1utylkjuni"]
+
+[ext_resource type="Script" path="res://Scripts/toolbar.gd" id="1_22i8x"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="Toolbar" type="HBoxContainer" parent="."]
+offset_left = 382.0
+offset_top = 556.0
+offset_right = 622.0
+offset_bottom = 596.0
+script = ExtResource("1_22i8x")
