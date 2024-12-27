@@ -15,7 +15,6 @@ func _process(_delta: float) -> void:
 	player_animation()
 
 func player_animation() -> void:
-	print(velocity.x)
 	if velocity.x > 0 and looking_left:
 		sprite.flip_h = true
 		looking_left = false
