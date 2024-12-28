@@ -6,6 +6,7 @@ extends Control
 @export var tool_slot_scene: PackedScene
 
 var slots: Array[ToolSlot] = []
+var default_slots_img: Array[String] = ["./../Assets/Sprites/Items/water-bucket.png"]
 var current_selected_slot: ToolSlot
 
 func _input(event: InputEvent) -> void:
@@ -21,7 +22,8 @@ func _ready() -> void:
 	for i in range(6):
 		var slot: ToolSlot = tool_slot_scene.instantiate()
 		slot.name = "ToolSlot" + str(i + 1)
-		slot.texture = load("res://icon.svg")
+		if i < default_slots_img.size() and default_slots_img[i]:
+			slot.texture = load(default_slots_img[i])
 		slot.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		slot.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		slot.configure_size(slot_size)
