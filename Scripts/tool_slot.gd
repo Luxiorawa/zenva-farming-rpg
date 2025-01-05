@@ -2,6 +2,7 @@ class_name ToolSlot
 extends TextureRect
 
 @onready var selection_border: NinePatchRect = $SelectionBorder
+var tool_index: World.farming_modes 
 
 func _ready() -> void:
 	selection_border.visible = false
