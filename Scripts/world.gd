@@ -27,6 +27,9 @@ const TOOLS_CONFIG: Dictionary = {
 var farming_mode_state: farming_modes = farming_modes.DIRT
 
 func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		next_day()
+
 	if Input.is_action_just_pressed("Interact"):
 		var mouse_pos := get_global_mouse_position()
 		var ground_tile_layer := tile_map.ground_layer
@@ -64,3 +67,18 @@ func retrieve_tile_custom_data(tile_pos: Vector2i, custom_data_layer: String, la
 		return layer_if_any.get_cell_tile_data(tile_pos).get_custom_data(custom_data_layer)
 
 	return null
+
+func next_day() -> void:
+	var ground_tile_layer := tile_map.ground_layer
+	var crops_tile_layer := tile_map.crops_layer
+	for cell in crops_tile_layer.get_used_cells():
+		var cell_seed_growth_level = retrieve_tile_custom_data(cell, "seed_growth_level", crops_tile_layer)
+
+		if cell_seed_growth_level != 3:
+			if retrieve_tile_custom_data(cell, "has_been_watered", ground_tile_layer):
+				crops_tile_layer.set_cell(cell, 1, Vector2i(cell_seed_growth_level + 1, 0))
+
+	const watered_dirt_pos := Vector2i(2, 0)
+	const dirt_pos := Vector2i(1, 0)
+	for cell in ground_tile_layer.get_used_cells_by_id(0, watered_dirt_pos):
+		ground_tile_layer.set_cell(cell, 0, dirt_pos)

@@ -20,7 +20,6 @@ tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAA
 tile_set = ExtResource("3_18eut")
 
 [node name="Crops" type="TileMapLayer" parent="TileMap"]
-z_index = -1
 tile_set = ExtResource("3_18eut")
 
 [node name="UI" parent="." instance=ExtResource("5_fnfbx")]
