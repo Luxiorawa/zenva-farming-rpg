@@ -34,24 +34,32 @@ func _process(_delta: float) -> void:
 		var tile_map_pos: Vector2i = ground_tile_layer.local_to_map(mouse_pos)
 
 		if farming_mode_state == farming_modes.DIRT:
-			print("Placing dirt")
 			place_dirt(ground_tile_layer, tile_map_pos)
 
 		if farming_mode_state == farming_modes.SEEDS:
-			print("Placing seeds")
 			place_seeds(ground_tile_layer, crops_tile_layer, tile_map_pos)
+
+		if farming_mode_state == farming_modes.WATER:
+			use_water_bucket(ground_tile_layer, tile_map_pos)
 
 		pass
 
 func place_dirt(ground_layer: TileMapLayer, tile_map_pos: Vector2i) -> void:
 	ground_layer.set_cell(tile_map_pos, 0, Vector2i(1, 0))
+	print("Placed dirt")
 
 func place_seeds(ground_layer: TileMapLayer, crops_layer: TileMapLayer, tile_map_pos: Vector2i) -> void:
-	if retrieve_tile_custom_data(tile_map_pos, "place_seeds", ground_layer) == true:
-		crops_layer.set_cell(tile_map_pos, 1, Vector2i(0, 0))
+	if retrieve_tile_custom_data(tile_map_pos, "place_seeds", ground_layer):
+		if !retrieve_tile_custom_data(tile_map_pos, "has_seeds", crops_layer):
+			crops_layer.set_cell(tile_map_pos, 1, Vector2i(0, 0))
+			print("Placed seeds")
+
+func use_water_bucket(ground_layer: TileMapLayer, tile_map_pos: Vector2i) -> void:
+	if retrieve_tile_custom_data(tile_map_pos, "can_water", ground_layer):
+		ground_layer.set_cell(tile_map_pos, 0, Vector2i(2, 0))
+		print("Watering dirt")
 
 func retrieve_tile_custom_data(tile_pos: Vector2i, custom_data_layer: String, layer_if_any: TileMapLayer) -> Variant:
-	print("Checking layer ", layer_if_any, " at pos ", tile_pos, " for custom_data named ", custom_data_layer)
 	if layer_if_any and layer_if_any is TileMapLayer and layer_if_any.get_cell_tile_data(tile_pos):
 		return layer_if_any.get_cell_tile_data(tile_pos).get_custom_data(custom_data_layer)
 
